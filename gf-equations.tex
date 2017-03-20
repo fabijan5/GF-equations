@@ -48,7 +48,7 @@
 \email{fabijan@vt.edu}
 \affiliation[Virginia Tech]
        {Department of Chemistry, Virginia Tech, Blacksburg, VA}
-\title{Reduced-Scaling Explicitly Correlated Electronic Structure Methods}
+\title{Programmable equations of some GF methodologies}
 \date{September 6, 2013}
 
 \SectionNumbersOn
@@ -60,46 +60,68 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \tableofcontents
-\section{Introduction}
+\newpage
+\section{General}
+In order to calculate ionization energy or electron affinity $E$ for electron in orbital $p$, one need to solve the following equation iteratively:
+\begin{align}
+\epsilon_{p} + \Sigma_{pp}(E) = E
+\end{align}
+where $\epsilon_{p}$ is Hartree-Fock orbital energy of orbital $p$ while $\Sigma_{pp}(E)$ is diagonal form of the self-energy. The self-energy my include different orders in perturbative expansion and here we include programmable equations for the most common expressions such as D2 and P3 in both spin-orbital and spin-free form. Throughout this text, we use the tensor notation, thus for standard two electron integrals, we use:
+\begin{align}
+g^{pq}_{rs} = \braket{pq|rs}
+\end{align}
+where $\bar{g}^{pq}_{rs} = \bra{pq}\ket{rs}$ is anti-symmetrized form of the two electron integrals.
+As usual, occupied and unoccupied orbitals are denoted by $i,j,k...$ and $a,b,c...$, respectively, while any orbital in the OBS is denoted by $p,q,r,s$.
 
+\subsection{D2 equations in spin-orbital basis}
+The expressions for the second -order self energy (D2) equations in the spin-orbital basis:
+\begin{align}
+\Sigma_{pq}^{(2)} = \frac{1}{2}\sum_{iab}\frac{\bar{g}^{pi}_{ab}\bar{g}^{ab}_{pi}}{E + \epsilon_{i}-\epsilon_{a}-\epsilon_{b}}+
+\frac{1}{2}\sum_{ija}\frac{\bar{g}^{pa}_{ij}\bar{g}^{ij}_{pa}}{E + \epsilon_{a}-\epsilon_{i}-\epsilon_{j}}
+\end{align}
 
-\section{Many-Body Electronic Structure Methods}
+\subsection{Spin-free D2 equations}
+The expressions for the second -order self energy (D2) equations in the spin-free form:
+\begin{align}
+\Sigma_{pq}^{(2)} = \sum_{iab}\frac{g^{pi}_{ab}(2g^{ab}_{pi}-g^{ab}_{ip})}{E + \epsilon_{i}-\epsilon_{a}-\epsilon_{b}}+
+\sum_{ija}\frac{g^{pa}_{ij}(2g^{ij}_{pa}-g^{ij}_{ap})}{E + \epsilon_{a}-\epsilon_{i}-\epsilon_{j}}
+\end{align}
 
-   
-\subsection{Hartree-Fock method}
+\subsection{P3 equations in spin-orbital basis}
+The expressions for the partial third-order self energy (P3) equations in the spin-orbital basis:
+\begin{align}
+\Sigma_{pq}^{(\text{P}3)} =\frac{1}{2}\sum_{iab}\frac{\bar{g}^{pi}_{ab}\bar{g}^{ab}_{qi}}{E + \epsilon_{i}-\epsilon_{a}-\epsilon_{b}}+\frac{1}{2}\sum_{ija}\frac{\bar{g}^{pa}_{ij}W_{qaij}}{E + \epsilon_{a}-\epsilon_{i}-\epsilon_{j}}+\frac{1}{2}\sum_{ija}\frac{U_{paij}(E)\bar{g}^{ij}_{qa}}{E + \epsilon_{a}-\epsilon_{i}-\epsilon_{j}}
+\end{align}
+with,
+\begin{align}
+W_{qaij}=\bar{g}^{qa}_{ij}+\frac{1}{2}\sum_{bc}\frac{\bar{g}^{qa}_{bc}\bar{g}^{bc}_{ij}}{\epsilon_{i} + \epsilon_{j}-\epsilon_{b}-\epsilon_{c}}+(1-P_{ij})\sum_{bk}\frac{\bar{g}^{qk}_{bi}\bar{g}^{ba}_{jk}}{\epsilon_{j} + \epsilon_{k}-\epsilon_{a}-\epsilon_{b}}
+\end{align}
+\begin{align}
+U_{qaij}(E)=-\frac{1}{2}\sum_{kl}\frac{\bar{g}^{pa}_{kl}\bar{g}^{kl}_{ij}}{E + \epsilon_{a}-\epsilon_{k}-\epsilon_{l}}-(1-P_{ij})\sum_{bk}\frac{\bar{g}^{pb}_{jk}\bar{g}^{ak}_{bi}}{E + \epsilon_{b}-\epsilon_{j}-\epsilon_{k}}
+\end{align}
+where $P_{ij}$ is symmetrizer.
 
-\subsection{Electron Correlation in Atoms and Molecules}
+\subsection{Spin-free P3 equations}
+The expressions for the partial third-order self energy (P3) equations in the spin-free form:
+\begin{align}
+\Sigma_{pq}^{(\text{P}3)} =\sum_{iab}\frac{g^{pi}_{ab}(2g^{ab}_{pi}-g^{ab}_{ip})}{E + \epsilon_{i}-\epsilon_{a}-\epsilon_{b}}+\sum_{ija}\frac{g^{pa}_{ij}W_{qaij}}{E + \epsilon_{a}-\epsilon_{i}-\epsilon_{j}}+\sum_{ija}\frac{U_{paij}(E)g^{ij}_{qa}}{E + \epsilon_{a}-\epsilon_{i}-\epsilon_{j}}
+\end{align}
+with 
+\begin{align}
+W_{qaij}&=2g^{qa}_{ij}-g^{qa}_{ji}+\sum_{bc}\frac{g^{qa}_{bc}(2g^{bc}_{ij}-g^{bc}_{ji})}{\epsilon_{i} + \epsilon_{j}-\epsilon_{b}-\epsilon_{c}} \\\nonumber
+&+\frac{1}{2}\sum_{bk}\frac{g^{qk}_{bi}g^{ba}_{jk}-2g^{qk}_{bi}g^{ba}_{kj}-2g^{qk}_{ib}g^{ba}_{jk}+4g^{qk}_{ib}g^{ba}_{kj}}{\epsilon_{j} + \epsilon_{k}-\epsilon_{a}-\epsilon_{b}} \\\nonumber
+&+\frac{1}{2}\sum_{bk}\frac{-2g^{qk}_{bj}g^{ba}_{ik}+g^{qk}_{bj}g^{ba}_{ki}+g^{qk}_{jb}g^{ba}_{ik}-2g^{qk}_{jb}g^{ba}_{ki}}{\epsilon_{i} + \epsilon_{k}-\epsilon_{a}-\epsilon_{b}} \\\nonumber
+&+\frac{1}{2}\sum_{bk}\frac{-2g^{qk}_{bj}g^{ba}_{ik}+g^{qk}_{bj}g^{ba}_{ki}+g^{qk}_{jb}g^{ba}_{ik}-2g^{qk}_{jb}g^{ba}_{ki}}{\epsilon_{i} + \epsilon_{k}-\epsilon_{a}-\epsilon_{b}} \\\nonumber
+&+\frac{1}{2}\sum_{bk}\frac{g^{qk}_{bi}g^{ba}_{jk}-2g^{qk}_{bi}g^{ba}_{kj}-2g^{qk}_{ib}g^{ba}_{jk}+4g^{qk}_{ib}g^{ba}_{kj}}{\epsilon_{j} + \epsilon_{k}-\epsilon_{a}-\epsilon_{b}}
+\end{align}
 
-\subsubsection{Configuration Interaction method}
-
-\subsubsection{Coupled Pair methods} 
-
-\subsubsection{Coupled Cluster methods}
-\subsubsection{Many-body perturbation theory}
- 
-\subsection{Explicitly Correlated Methods}
-\subsubsection{Motivation}
-
-\subsubsection{Explicitly Correlated Moller-Plesset methods}
-  
-
-\section{Reduction of Computational Complexity in Electron Correlation Methods}
-
-\subsection{Density Fitting}
-
-\subsection{Localization of molecular orbitals}
-     
-\subsubsection{Boys-Foster}
-
-\subsubsection{Pipek-Mezey}
-
-\subsubsection{Projected Atomic orbitals}
-
-\subsubsection{Pair-natural orbitals}
-
-\subsubsection{Orbital-specific virtuals}
-
-\section{Future research plan}
-
+\begin{align}
+U_{paij}(E)&=-\sum_{kl}\frac{g^{pa}_{kl}(2g^{kl}_{ij}-g^{kl}_{ji})}{E + \epsilon_{a}-\epsilon_{k}-\epsilon_{l}} \\\nonumber
+&-\frac{1}{2}\sum_{bk}\frac{g^{pb}_{jk}g^{ak}_{bi}-2g^{pb}_{jk}g^{ak}_{ib}-2g^{pb}_{kj}g^{ak}_{bi}+g^{pb}_{kj}g^{ak}_{ib}}{E + \epsilon_{b}-\epsilon_{j}-\epsilon_{k}} \\\nonumber
+&-\frac{1}{2}\sum_{bk}\frac{-2g^{pb}_{ik}g^{ak}_{bj}+4g^{pb}_{ik}g^{ak}_{jb}+g^{pb}_{ki}g^{ak}_{bj}-2g^{pb}_{ki}g^{ak}_{jb}}{E + \epsilon_{b}-\epsilon_{i}-\epsilon_{k}} \\\nonumber
+&-\frac{1}{2}\sum_{bk}\frac{-2g^{pb}_{ik}g^{ak}_{bj}+4g^{pb}_{ik}g^{ak}_{jb}+g^{pb}_{ki}g^{ak}_{bj}-2g^{pb}_{ki}g^{ak}_{jb}}{E + \epsilon_{b}-\epsilon_{i}-\epsilon_{k}} \\\nonumber
+&-\frac{1}{2}\sum_{bk}\frac{g^{pb}_{jk}g^{ak}_{bi}-2g^{pb}_{jk}g^{ak}_{ib}-2g^{pb}_{kj}g^{ak}_{bi}+g^{pb}_{kj}g^{ak}_{ib}}{E + \epsilon_{b}-\epsilon_{j}-\epsilon_{k}}
+\end{align}
+Both expressions for $W$ and $U$ matrix elements can be reduced furthermore.
 
 \end{document}
