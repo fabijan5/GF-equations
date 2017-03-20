@@ -1,0 +1,105 @@
+\documentclass[journal=jacsat]{achemso}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Includes various packages for extra functionality
+%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{modiagram}	% Molecular orbital diagrams
+
+\usepackage{mathtools}		% Make pretty formulas
+\usepackage{fixltx2e}		% Allow subscripts
+\usepackage{graphicx}		% Improved graphics
+\usepackage{bm} 			% Bold math symbols 
+\usepackage{txfonts} 		% Allow times-like fonts in equations
+\usepackage{mathpazo} 		% Palatino fonts for equations
+\usepackage{dcolumn}		% Align tabular columns on decimal points
+\usepackage{footmisc}		% Foot note options
+\usepackage{mathrsfs}		% RSFS fonts in equations
+\usepackage{mhchem}
+\usepackage{braket}
+\usepackage{commath}
+\usepackage[T1]{fontenc}
+\usepackage{currvita}
+\numberwithin{equation}{section}
+
+%\usepackage[polish]{babel}	% Select language standard
+%\usepackage{natbib}		% Support for various natbib BibTex styles
+
+
+% This is for use of Times New Roman
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+\newcommand{\T}[4]{T^{#1 #2}_{#3 #4}}
+\renewcommand{\O}[1]{$\mathcal{O}\left( #1 \right)$}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\baselinestretch}{2} % This is for the use of double space
+%\setkeys{acs}{articletitle = true} % Include title in bibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Start document
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Fabijan Pavo\v{s}evi\'{c}}
+\email{fabijan@vt.edu}
+\affiliation[Virginia Tech]
+       {Department of Chemistry, Virginia Tech, Blacksburg, VA}
+\title{Reduced-Scaling Explicitly Correlated Electronic Structure Methods}
+\date{September 6, 2013}
+
+\SectionNumbersOn
+\begin{document}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%
+% Paper
+%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\tableofcontents
+\section{Introduction}
+
+
+\section{Many-Body Electronic Structure Methods}
+
+   
+\subsection{Hartree-Fock method}
+
+\subsection{Electron Correlation in Atoms and Molecules}
+
+\subsubsection{Configuration Interaction method}
+
+\subsubsection{Coupled Pair methods} 
+
+\subsubsection{Coupled Cluster methods}
+\subsubsection{Many-body perturbation theory}
+ 
+\subsection{Explicitly Correlated Methods}
+\subsubsection{Motivation}
+
+\subsubsection{Explicitly Correlated Moller-Plesset methods}
+  
+
+\section{Reduction of Computational Complexity in Electron Correlation Methods}
+
+\subsection{Density Fitting}
+
+\subsection{Localization of molecular orbitals}
+     
+\subsubsection{Boys-Foster}
+
+\subsubsection{Pipek-Mezey}
+
+\subsubsection{Projected Atomic orbitals}
+
+\subsubsection{Pair-natural orbitals}
+
+\subsubsection{Orbital-specific virtuals}
+
+\section{Future research plan}
+
+
+\end{document}
